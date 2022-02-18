@@ -5,7 +5,7 @@ WORKDIR /app
 # 複製目前目錄下的內容，放進 Docker 容器中的 /app
 COPY . /app 
 # 安裝 requirements.txt 中所列的必要套件
-RUN pip install -r requirements.txt 
+RUN pip install -r requirements.txt
 
 CMD ["python", "main.py"]
 
