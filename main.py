@@ -37,8 +37,7 @@ def search_Stock():
             fig = create_figure_yfinance(stockNumber, df)
             filepath = 'static/images/stock.png'
             fig.savefig(filepath, dpi = 200)
-            full_filename = os.path.join(folder, 'stock.png')
-            return render_template("index.html", image_names = full_filename)
+            return render_template("index.html")
 
             '''
             # 台灣證券交易所API 取法
