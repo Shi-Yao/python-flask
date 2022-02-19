@@ -1,7 +1,6 @@
 import pandas as pd
 import requests
 import io
-import os
 import matplotlib.dates as mdates    #處理日期
 import matplotlib.pyplot as plt
 import yfinance as yf
@@ -31,12 +30,12 @@ def search_Stock():
             flash('請輸入股票代號')
             return redirect(url_for('error'))
         else :
-            folder = os.path.join('static', 'images')
             # yfinance
             df = yf.download(stockNumber +'.TW',start = startDate, end = endDate)
             fig = create_figure_yfinance(stockNumber, df)
             filepath = 'static/images/stock.png'
             fig.savefig(filepath, dpi = 200)
+            plt.close(fig)
             return render_template("index.html")
 
             '''
@@ -100,6 +99,17 @@ def create_figure_yfinance(stockNumber, dataFrame):
     style = mpf.make_mpf_style(base_mpf_style='nightclouds', marketcolors=colorStyle)
     mpf.plot(dataFrame, type = 'candle',mav=(5,10,20,60), style = style, ax = ax) # 蠟燭圖
     return fig
+
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'no-cache, no-store'
+    return response
+
 '''
 def create_figure(stockNumber, stock_pd):
     fig = Figure()
