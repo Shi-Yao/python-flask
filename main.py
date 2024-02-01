@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 import mplfinance as mpf
 from matplotlib.figure import Figure
-from flask import Flask, flash, redirect, url_for, render_template, send_from_directory, request
+from flask import Flask, flash, redirect, url_for, render_template, request
+
 
 app = Flask(__name__)
 app.secret_key = 'test'
